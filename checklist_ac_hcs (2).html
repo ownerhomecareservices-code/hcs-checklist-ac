@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Checklist AC — Home Care Services</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bd:#0C447C;--bm:#378ADD;--bl:#E6F1FB;
+  --td:#085041;--tm:#1D9E75;--tl:#E1F5EE;
+  --rd:#791F1F;--rl:#FCEBEB;
+  --ad:#633806;--am:#BA7517;--al:#FAEEDA;
+  --pd:#27500A;--pl:#EAF3DE;
+  --bg:#fff;--bg2:#f8f7f4;--border:#e5e4df;
+  --text:#2C2C2A;--text2:#6b6a66;
+}
+@media(prefers-color-scheme:dark){:root{--bg:#1a1a18;--bg2:#242422;--border:#333330;--text:#e8e7e3;--text2:#a0a09c;--bl:#0f1e2e;--tl:#0a1e16;--rl:#1e0a0a;--al:#1e1408;--pl:#142010;}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;color:var(--text);background:var(--bg);min-height:100vh}
+.scr{display:none}.scr.on{display:block}
+.bar{display:flex;align-items:center;gap:8px;padding:11px 16px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100}
+.bar h2{font-size:15px;font-weight:600;flex:1}
+.sub{font-size:11px;color:var(--text2)}
+.bk{background:none;border:none;cursor:pointer;color:var(--text2);padding:6px;font-size:13px;border-radius:8px}
+.bk:hover{background:var(--bg2)}
+.f{padding:11px 16px;border-bottom:1px solid var(--border)}
+.f label{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.f input,.f select,.f textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:14px;background:var(--bg);color:var(--text);font-family:inherit;-webkit-appearance:none}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--bm)}
+.f textarea{resize:none}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sect{font-size:11px;font-weight:600;color:var(--text2);padding:12px 16px 4px;letter-spacing:.06em;text-transform:uppercase}
+.nav{position:sticky;bottom:0;background:var(--bg);border-top:1px solid var(--border);padding:11px 16px;display:flex;gap:8px}
+.bp{flex:1;background:var(--bd);color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.bp:hover{opacity:.9}.bp:active{transform:scale(.98)}
+.bp.green{background:var(--tm)}.bp.amber{background:var(--am)}.bp.pine{background:var(--pd)}.bp.gray{background:#444441}
+.bs{background:none;border:1px solid var(--border);border-radius:10px;padding:13px 14px;font-size:13px;cursor:pointer;color:var(--text2);font-family:inherit}
+.bs:hover{background:var(--bg2)}
+.jtype-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 16px}
+.jtype-card{border:2px solid var(--border);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .15s}
+.jtype-card.sel.c{border-color:var(--tm);background:var(--tl)}
+.jtype-card.sel.s{border-color:var(--am);background:var(--al)}
+.jtype-card.sel.i{border-color:var(--pd);background:var(--pl)}
+.jtype-icon{font-size:26px;margin-bottom:7px}
+.jtype-name{font-size:12px;font-weight:700;margin-bottom:3px}
+.jtype-desc{font-size:10px;color:var(--text2);line-height:1.4}
+.ac-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px}
+.ac-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:13px 11px;cursor:pointer;text-align:left;transition:all .15s;width:100%}
+.ac-card:hover{border-color:var(--bm);background:var(--bl)}
+.ac-icon{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:7px}
+.tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{padding:9px 11px;font-size:10px;font-weight:700;color:var(--text2);white-space:nowrap;cursor:pointer;border-bottom:2.5px solid transparent;flex-shrink:0;transition:all .15s;letter-spacing:.03em}
+.tab.on{color:var(--bd);border-bottom-color:var(--bd)}
+.tab.done{color:var(--tm);border-bottom-color:var(--tm)}
+.pg-bar{height:4px;background:var(--border)}
+.pg-fill{height:4px;background:var(--bm);transition:width .3s}
+.pg-row{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);padding:5px 16px 2px}
+.fase-h{background:var(--bg2);padding:7px 16px;font-size:10px;font-weight:700;color:var(--text2);letter-spacing:.07em;text-transform:uppercase;border-top:1px solid var(--border)}
+.ck-row{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:flex-start;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ck-row:active{background:var(--bg2)}.ck-row.done{opacity:.6}
+.ck-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;transition:all .15s;margin-top:1px}
+.ck-box.on{background:var(--bm);border-color:var(--bm)}
+.itm-t{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:3px}
+.itm-s{font-size:12px;color:var(--text2);line-height:1.5}
+.itm-w{font-size:11px;color:var(--ad);background:var(--al);border-radius:6px;padding:5px 9px;margin-top:6px;line-height:1.4}
+.bdg{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin:4px 3px 0 0}
+.bdg-b{background:var(--bl);color:var(--bd)}.bdg-r{background:var(--rl);color:var(--rd)}.bdg-g{background:var(--tl);color:var(--td)}
+.ptbl{width:100%;border-collapse:collapse}
+.ptbl th{font-size:10px;font-weight:700;color:var(--text2);padding:7px 12px;border-bottom:1px solid var(--border);text-align:left;background:var(--bg2);letter-spacing:.04em;text-transform:uppercase}
+.ptbl td{padding:8px 10px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle}
+.ptbl tr:last-child td{border-bottom:none}
+.p-name{font-weight:600;font-size:12px;line-height:1.3}
+.p-std{font-size:10px;color:var(--text2);margin-top:1px}
+.pv{width:100%;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;background:var(--bg);color:var(--text);font-family:inherit;-webkit-appearance:none}
+.pv:focus{outline:none;border-color:var(--bm)}
+.pv-num{width:70px;text-align:center}
+.rg{display:flex;gap:10px;flex-wrap:wrap}
+.rg label{display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer}
+.rg input{accent-color:var(--bm);cursor:pointer}
+.ok-c{text-align:center;width:34px}
+.ok-c input{accent-color:var(--tm);cursor:pointer;width:15px;height:15px}
+.no-c{text-align:center;width:34px}
+.no-c input{accent-color:var(--rd);cursor:pointer;width:15px;height:15px}
+.kl-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.kl-row:active{background:var(--bg2)}
+.kl-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;color:#fff;font-size:13px;font-weight:700}
+.kl-box.on{background:var(--am);border-color:var(--am)}
+.td-row{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);cursor:pointer}
+.td-row:active{background:var(--bg2)}
+.td-box{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;color:#fff;font-size:13px;font-weight:700}
+.td-box.on{background:var(--bm);border-color:var(--bm)}
+.ap-row{display:flex;align-items:center;padding:10px 16px;border-bottom:1px solid var(--border);gap:8px}
+.ap-lbl{font-size:13px;flex:1}
+.ap-btns{display:flex;gap:8px}
+.ap-btn{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);cursor:pointer;background:none;color:var(--text2);transition:all .15s}
+.ap-btn.y.on{background:var(--tl);border-color:var(--tm);color:var(--td)}
+.ap-btn.n.on{background:var(--rl);border-color:var(--rd);color:var(--rd)}
+.ana-row{padding:10px 16px;border-bottom:1px solid var(--border)}
+.ana-row label{display:block;font-size:11px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.ana-row textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;resize:none}
+.done-ring{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:20px auto 10px;font-size:24px}
+.stat-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 16px}
+.stat{background:var(--bg2);border-radius:12px;padding:11px;text-align:center;border:1px solid var(--border)}
+.stat-n{font-size:18px;font-weight:700;margin-bottom:3px}
+.stat-l{font-size:10px;color:var(--text2)}
+.sum-card{background:var(--bg2);border-radius:12px;margin:10px 16px;overflow:hidden;border:1px solid var(--border)}
+.s-row{display:flex;justify-content:space-between;padding:8px 13px;border-bottom:1px solid var(--border);font-size:12px;gap:8px}
+.s-row:last-child{border-bottom:none}
+.s-row .k{color:var(--text2);width:44%;flex-shrink:0}
+.s-row .v{font-weight:600;text-align:right;line-height:1.3}
+.hist-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.hist-row:last-child{border-bottom:none}
+.tag{font-size:10px;font-weight:600;padding:3px 9px;border-radius:10px;display:inline-block}
+.tag-g{background:var(--tl);color:var(--td)}.tag-a{background:var(--al);color:var(--ad)}
+.tag-r{background:var(--rl);color:var(--rd)}.tag-b{background:var(--bl);color:var(--bd)}
+.tag-p{background:var(--pl);color:var(--pd)}
+.banner{border-left:3px solid;padding:9px 11px;margin:10px 16px;font-size:12px;border-radius:0 8px 8px 0;line-height:1.5}
+.banner.info{border-color:var(--bm);background:var(--bl);color:var(--bd)}
+.banner.warn{border-color:var(--am);background:var(--al);color:var(--ad)}
+.banner.danger{border-color:var(--rd);background:var(--rl);color:var(--rd)}
+.sec-hdr{font-size:12px;font-weight:700;padding:9px 16px 5px}
+.url-inp{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:12px;background:var(--bg);color:var(--text);font-family:monospace}
+.url-inp:focus{outline:none;border-color:var(--bm)}
+</style>
+</head>
+<body>
+
+<div id="s-home" class="scr on">
+  <div class="bar">
+    <div style="flex:1"><h2>Checklist AC</h2><div class="sub">Home Care Services</div></div>
+    <button class="bs" style="padding:7px 10px;font-size:16px" onclick="go('s-setup')">⚙️</button>
+  </div>
+  <div id="url-banner"></div>
+  <div style="padding:12px 16px 4px;font-size:12px;font-weight:600;color:var(--text2)">1. Pilih jenis pekerjaan:</div>
+  <div class="jtype-grid">
+    <button class="jtype-card" id="jc-cleaning" onclick="pickJob('cleaning')">
+      <div class="jtype-icon">🧹</div>
+      <div class="jtype-name">Cleaning</div>
+      <div class="jtype-desc">Cuci AC & cleaning</div>
+    </button>
+    <button class="jtype-card" id="jc-service" onclick="pickJob('service')">
+      <div class="jtype-icon">🔧</div>
+      <div class="jtype-name">Service</div>
+      <div class="jtype-desc">Diagnosa & perbaikan</div>
+    </button>
+    <button class="jtype-card" id="jc-instalasi" onclick="pickJob('instalasi')">
+      <div class="jtype-icon">🏗️</div>
+      <div class="jtype-name">Instalasi</div>
+      <div class="jtype-desc">Pasang baru, relokasi</div>
+    </button>
+  </div>
+  <div style="padding:4px 16px 2px;font-size:12px;font-weight:600;color:var(--rd)">Pekerjaan khusus:</div>
+  <div style="padding:6px 16px 10px">
+    <button class="jtype-card" id="jc-freon" onclick="pickJob('freon')" style="width:100%;text-align:left;display:flex;align-items:center;gap:12px;padding:12px 14px">
+      <div class="jtype-icon" style="background:var(--rl);flex-shrink:0">🔍</div>
+      <div><div class="jtype-name" style="color:var(--rd)">Repair Kebocoran Freon</div><div class="jtype-desc">Pressure holding test · Vacuum · Charging — SOP lengkap</div></div>
+    </button>
+  </div>
+  <div style="padding:4px 16px 2px;font-size:12px;font-weight:600;color:var(--text2)">2. Pilih tipe AC:</div>
+  <div class="ac-grid">
+    <button class="ac-card" onclick="pickAC('split')"><div class="ac-icon" style="background:#E6F1FB">❄️</div><div style="font-size:12px;font-weight:600">AC Split</div><div style="font-size:10px;color:var(--text2)">Wall mounted</div></button>
+    <button class="ac-card" onclick="pickAC('cassette')"><div class="ac-icon" style="background:#E1F5EE">🔲</div><div style="font-size:12px;font-weight:600">AC Cassette</div><div style="font-size:10px;color:var(--text2)">Plafon · 4 arah</div></button>
+    <button class="ac-card" onclick="pickAC('standing')"><div class="ac-icon" style="background:#EAF3DE">📺</div><div style="font-size:12px;font-weight:600">AC Standing</div><div style="font-size:10px;color:var(--text2)">Floor standing</div></button>
+    <button class="ac-card" onclick="pickAC('portable')"><div class="ac-icon" style="background:#EEEDFE">💼</div><div style="font-size:12px;font-weight:600">AC Portable</div><div style="font-size:10px;color:var(--text2)">Dengan selang buang</div></button>
+    <button class="ac-card" onclick="pickAC('ducted')"><div class="ac-icon" style="background:#FAEEDA">🌬️</div><div style="font-size:12px;font-weight:600">AC Ducted</div><div style="font-size:10px;color:var(--text2)">Sistem sentral</div></button>
+    <button class="ac-card" onclick="pickAC('window')"><div class="ac-icon" style="background:#FAECE7">🪟</div><div style="font-size:12px;font-weight:600">AC Window</div><div style="font-size:10px;color:var(--text2)">Satu bodi</div></button>
+  </div>
+  <div id="hist-sec" style="display:none;padding:0 16px 16px">
+    <div class="sect" style="padding-left:0">Terakhir Dikerjakan</div>
+    <div id="hist-list"></div>
+  </div>
+</div>
+
+<div id="s-setup" class="scr">
+  <div class="bar"><button class="bk" onclick="go('s-home')">← Kembali</button><h2>Pengaturan</h2></div>
+  <div class="banner info">Paste URL Web App dari Google Apps Script.</div>
+  <div class="f"><label>URL Google Apps Script Web App</label><input class="url-inp" id="script-url" type="url" placeholder="https://script.google.com/macros/s/.../exec"></div>
+  <div class="f"><label>Nama Teknisi Default</label><input id="def-tek" type="text" placeholder="Nama teknisi yang sering pakai HP ini"></div>
+  <div class="f"><label>Nama Tim / Cabang</label><input id="team-name" type="text" placeholder="Contoh: Tim Depok"></div>
+  <div style="padding:12px 16px;display:flex;flex-direction:column;gap:8px">
+    <button class="bp" onclick="testConn()">🔌 Test Koneksi</button>
+    <button class="bp green" onclick="saveSetup()">✓ Simpan Pengaturan</button>
+  </div>
+  <div id="test-result"></div>
+</div>
+
+<div id="s-info" class="scr">
+  <div class="bar"><button class="bk" onclick="go('s-home')">←</button><div style="flex:1"><h2 id="info-h">Data Pekerjaan</h2><div class="sub" id="info-sub"></div></div></div>
+  <div class="sect">Data Customer</div>
+  <div class="f"><label>Nama customer</label><input id="f-pel" type="text" placeholder="Nama lengkap customer" autocomplete="off"></div>
+  <div class="f"><label>Alamat / lokasi</label><input id="f-lok" type="text" placeholder="Alamat lengkap" autocomplete="off"></div>
+  <div class="f"><label>No. HP customer</label><input id="f-hp" type="tel" placeholder="+62..." autocomplete="off"></div>
+  <div class="sect">Data Unit AC</div>
+  <div class="f"><div class="f2"><div><label>Brand AC</label><input id="f-mrk" type="text" placeholder="Panasonic, dll"></div><div><label>PK AC</label><select id="f-pk"><option>½ PK</option><option>¾ PK</option><option selected>1 PK</option><option>1½ PK</option><option>2 PK</option><option>2½ PK</option><option>3 PK</option></select></div></div></div>
+  <div class="f"><div class="f2"><div><label>Jenis freon</label><select id="f-freon"><option>R-32</option><option>R-410A</option><option>R-22</option><option>R-134a</option><option>Lainnya</option></select></div><div><label>Model / S/N</label><input id="f-sn" type="text" placeholder="Opsional"></div></div></div>
+  <div class="f" id="f-helper-row"><label>Helper (opsional)</label><input id="f-helper" type="text" placeholder="Nama helper"></div>
+  <div class="f" id="f-jenis-inst-row" style="display:none"><label>Jenis instalasi</label><select id="f-jenis-inst"><option>Baru</option><option>Bongkar pasang</option><option>Relokasi</option></select></div>
+  <div class="sect">Data Teknisi</div>
+  <div class="f"><label>Nama teknisi</label><input id="f-tek" type="text" placeholder="Nama lengkap teknisi"></div>
+  <div class="f"><div class="f2"><div><label>Tanggal</label><input id="f-tgl" type="date"></div><div><label>Jam mulai</label><input id="f-jam" type="time"></div></div></div>
+  <div class="nav"><button class="bp" id="btn-start" onclick="startForm()">Mulai Checklist →</button></div>
+</div>
+
+<div id="s-form" class="scr">
+  <div class="bar">
+    <button class="bk" onclick="go('s-info')">←</button>
+    <div style="flex:1"><h2 id="form-h">Checklist</h2><div class="sub" id="form-sub"></div></div>
+    <button class="bs" style="padding:7px 10px;font-size:15px" onclick="doSave(this)">💾</button>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="pg-row"><span id="pg-lbl"></span><span id="pg-pct">0%</span></div>
+  <div class="pg-bar"><div class="pg-fill" id="pg-fill" style="width:0%"></div></div>
+  <div id="form-body"></div>
+  <div class="nav">
+    <button class="bs" id="btn-prev" onclick="prevTab()" style="display:none">←</button>
+    <button class="bp" id="btn-next" onclick="nextTab()">Berikutnya →</button>
+  </div>
+</div>
+
+<div id="s-done" class="scr">
+  <div class="bar"><h2>Pekerjaan Selesai</h2></div>
+  <div class="done-ring" id="done-ring" style="background:var(--tl)">✓</div>
+  <div style="text-align:center;padding:0 16px 10px">
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px">Checklist Lengkap!</div>
+    <div style="font-size:12px;color:var(--text2)" id="done-sub"></div>
+  </div>
+  <div id="done-gs" style="padding:0 16px 8px;text-align:center;font-size:12px"></div>
+  <div class="stat-g">
+    <div class="stat"><div class="stat-n" id="st-a" style="color:var(--tm)">0</div><div class="stat-l" id="st-la">Selesai</div></div>
+    <div class="stat"><div class="stat-n" id="st-b" style="color:var(--bd)">0</div><div class="stat-l">Before OK</div></div>
+    <div class="stat"><div class="stat-n" id="st-c" style="color:var(--tm)">0</div><div class="stat-l">After OK</div></div>
+  </div>
+  <div class="sum-card" id="sum-card"></div>
+  <div class="nav" style="flex-direction:column;gap:8px">
+    <button class="bp amber" id="btn-retry" onclick="retrySend()" style="display:none">🔄 Kirim Ulang ke Sheets</button>
+    <button class="bp gray" onclick="go('s-home')">🏠 Kembali ke Beranda</button>
+  </div>
+</div>
+
+<script>
+const nw=new Date();
+document.getElementById('f-tgl').value=nw.toISOString().split('T')[0];
+document.getElementById('f-jam').value=nw.toTimeString().slice(0,5);
+
+const AC_LABELS={split:'AC Split',cassette:'AC Cassette',standing:'AC Standing',portable:'AC Portable',ducted:'AC Ducted',window:'AC Window'};
+const JOB_LABELS={cleaning:'Cleaning',service:'Service / Repair',instalasi:'Instalasi',freon:'Repair Kebocoran Freon'};
+
+// ══ CLEANING STEPS ══
+const CL_STEPS={
+  split:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Foto kondisi awal unit indoor & outdoor',s:'Tampak depan dan samping sebelum dibongkar',w:null,b:['BEFORE foto']},
+      {t:'Matikan dari remote, lalu dari breaker',s:'Verifikasi listrik mati sebelum menyentuh unit',w:'Jangan bongkar unit saat listrik menyala',b:['WAJIB']},
+      {t:'Gelar alas plastik di bawah unit indoor',s:'Lindungi lantai dan furnitur di sekitar unit',w:null,b:null},
+    ]},
+    {h:'Fase 2 — Cleaning indoor',items:[
+      {t:'Buka panel & lepas filter',s:'Tarik ke atas, foto posisi filter sebelum dilepas',w:'Foto filter kotor sebelum dicuci',b:['2 filter']},
+      {t:'Cuci filter & keringkan total',s:'Ketuk → siram belakang ke depan → bilas → angin-anginkan',w:'Filter HARUS kering total sebelum dipasang kembali',b:['jangan diperas']},
+      {t:'Bersihkan evaporator dengan coil cleaner',s:'Semprot searah sirip, tunggu 10 mnt, bilas. Foto before & after.',w:'Semprot SEARAH sirip — melintang merusak sirip',b:null},
+      {t:'Bersihkan drain pan — cek retakan & sudut',s:'Gunakan senter, bersihkan kotoran di semua sudut',w:'Drain pan retak = rekomendasikan ganti ke customer',b:null},
+      {t:'Cek drain pipe — siram harus keluar < 30 detik',s:'Jika lambat: semprot angin dari ujung luar',w:null,b:['< 30 detik']},
+      {t:'Bersihkan blower & seluruh casing',s:'Coil cleaner ke bilah blower, putar manual. Lap casing & louver.',w:null,b:null},
+      {t:'Pasang kembali filter & tutup panel',s:'Filter kering & posisi benar. Tekan semua sisi panel sampai klik.',w:'Filter basah = sumber bau apek & jamur baru',b:null},
+    ]},
+    {h:'Fase 3 — Cleaning outdoor',items:[
+      {t:'Semprot kondensor dari dalam ke luar',s:'Dari sisi fan ke sisi koil.',w:'JANGAN semprot dari luar ke dalam',b:null},
+      {t:'Bersihkan kipas outdoor & periksa pipa refrigeran',s:'Lap kipas. Cek tanda oli di pipa.',w:'Tanda oli di pipa = bocor freon — laporkan ke katek',b:['cek tanda oli']},
+    ]},
+    {h:'Fase 4 — Test run (min. 30 menit)',items:[
+      {t:'Nyalakan AC — monitor 30 menit penuh',s:'Cek tetes air, bunyi abnormal, pendinginan, drain mengalir',w:'Teknisi WAJIB di lokasi sampai 30 menit selesai',b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+  cassette:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Siapkan tangga stabil & terpal besar',s:'Tangga tidak boleh bergoyang.',w:null,b:['TANGGA STABIL']},
+      {t:'Foto panel dekoratif dari bawah',s:'Referensi pasang ulang',w:null,b:null},
+      {t:'Matikan dari remote lalu dari breaker',s:'Verifikasi mati sebelum naik tangga',w:null,b:['WAJIB']},
+    ]},
+    {h:'Fase 2 — Panel & filter',items:[
+      {t:'Lepas panel dekoratif — minta bantuan asisten',s:'Tekan kait 4 sudut, turunkan pelan.',w:'Asisten harus pegang panel dari bawah',b:null},
+      {t:'Nomeri 4 filter sesuai posisi (N/S/E/W)',s:'Tulis label sebelum dilepas',w:null,b:['4 filter']},
+      {t:'Cuci 4 filter & keringkan',s:'Ketuk, siram belakang ke depan, angin-anginkan',w:'Jangan diperas atau dijemur langsung matahari',b:null},
+    ]},
+    {h:'Fase 3 — Unit dalam plafon',items:[
+      {t:'Pasang plastik pelindung sekeliling unit',s:'Lindungi PCB dari percikan air',w:'Air masuk PCB = kerusakan fatal',b:['LINDUNGI PCB']},
+      {t:'Semprot & bersihkan evaporator melingkar',s:'Coil cleaner dalam ke luar, tunggu 10 mnt',w:null,b:null},
+      {t:'Bersihkan fan sentrifugal',s:'Coil cleaner ke bilah fan, putar manual',w:null,b:null},
+      {t:'Cek drain pan & drain pump — < 60 detik',s:'Siram — pompa aktif & air keluar.',w:'Pompa mati = air meluap ke plafon',b:['< 60 detik']},
+      {t:'Pasang 4 filter sesuai posisi & panel',s:'Kaitkan panel 4 sudut.',w:'Panel harus rata & tidak miring',b:null},
+    ]},
+    {h:'Fase 4 — Test run (min. 30 menit)',items:[
+      {t:'Nyalakan — test swing louver 4 arah',s:'Cek semua arah bergerak normal. Monitor 30 mnt.',w:'Sinari bawah unit dengan senter',b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+  standing:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Foto 4 sisi unit sebelum dikerjakan',s:'Depan, belakang, kiri, kanan',w:null,b:['4 foto']},
+      {t:'Matikan dari breaker',s:'Unit besar = risiko lebih tinggi',w:null,b:['WAJIB']},
+    ]},
+    {h:'Fase 2 — Cleaning indoor',items:[
+      {t:'Buka front cover — lepas sekrup',s:'Simpan sekrup di tempat aman',w:null,b:null},
+      {t:'Lepas & cuci filter intake bawah',s:'Cuci belakang ke depan, bilas, angin-anginkan',w:'Kering total sebelum dipasang',b:null},
+      {t:'Bersihkan evaporator — lindungi PCB dulu',s:'Coil cleaner searah sirip.',w:'PCB di atas/samping — tutup plastik dulu',b:null},
+      {t:'Bersihkan kipas sirocco',s:'Lap bilah dengan kain dililitkan di stick panjang',w:null,b:null},
+      {t:'Bersihkan drain pan di base — wajib senter',s:'Siram, pastikan keluar lancar.',w:'Sering dilewati — ini sumber bocor paling umum',b:null},
+      {t:'Pasang filter & kencangkan sekrup cover',s:'Filter kering & benar.',w:null,b:null},
+    ]},
+    {h:'Fase 3 — Test run (min. 30 menit)',items:[
+      {t:'Nyalakan — monitor & cek bawah unit',s:'Drain pan tidak boleh bocor ke lantai',w:null,b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+  portable:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Cabut kabel listrik dari stop kontak',s:'Tidak ada breaker terpisah',w:null,b:['PERTAMA & WAJIB']},
+      {t:'Lepas selang buang & kosongkan tangki',s:'Keluarkan air. Bersihkan dalam tangki.',w:'Tangki penuh = risiko air ke komponen listrik',b:null},
+    ]},
+    {h:'Fase 2 — Cleaning unit',items:[
+      {t:'Lepas & cuci filter intake belakang',s:'Cuci belakang ke depan, angin-anginkan',w:null,b:null},
+      {t:'Bersihkan evaporator (koil dingin)',s:'Coil cleaner, tunggu, lap kain lembab',w:null,b:null},
+      {t:'Cek kondensor — vacuum & sikat dari luar',s:'JANGAN semprot air ke kondensor',w:'Sangat kotor = rekomendasikan servis bengkel',b:null},
+      {t:'Inspeksi & bersihkan selang buang',s:'Senter dalam selang, cek penyempitan.',w:'Selang tertekuk = AC tidak dingin',b:['cek tekukan']},
+      {t:'Pasang filter & sambungkan selang',s:'Sambungan di unit DAN jendela harus rapat.',w:'Tidak rapat = udara panas balik ke ruangan',b:null},
+    ]},
+    {h:'Fase 3 — Test run',items:[
+      {t:'Nyalakan — cek selang, window kit & pendinginan',s:'Udara panas keluar lewat selang?',w:'Panas tidak boleh bocor ke ruangan',b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+  ducted:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Koordinasi dengan pengguna gedung',s:'Informasikan jadwal & area yang akan ditutup',w:null,b:null},
+      {t:'Matikan AHU dari panel utama',s:'Pastikan AHU benar-benar berhenti',w:'Jangan kerjakan jika AHU masih berputar',b:['WAJIB']},
+    ]},
+    {h:'Fase 2 — Cleaning FCU/AHU',items:[
+      {t:'Lepas & cuci filter udara',s:'Cuci dengan air bertekanan rendah, angin-anginkan',w:null,b:null},
+      {t:'Bersihkan coil evaporator',s:'Coil cleaner searah sirip, tunggu, bilas',w:'Semprot SEARAH sirip',b:null},
+      {t:'Bersihkan blower/fan FCU',s:'Lap bilah dan housing fan',w:null,b:null},
+      {t:'Bersihkan drain pan & cek drain pipe',s:'Pastikan drain mengalir lancar',w:'Drain mampet = air bocor ke plafon',b:null},
+      {t:'Pasang kembali filter',s:'Filter kering & terpasang benar',w:null,b:null},
+    ]},
+    {h:'Fase 3 — Test run',items:[
+      {t:'Nyalakan AHU — monitor suhu supply & return',s:'Cek delta T, bunyi abnormal, getaran',w:'Monitor sampai sistem stabil',b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+  window:{fases:[
+    {h:'Fase 1 — Persiapan',items:[
+      {t:'Periksa dudukan/bracket — pastikan kokoh',s:'Goyang unit pelan. Kencangkan baut jika perlu.',w:null,b:['CEK DUDUKAN DULU']},
+      {t:'Cabut kabel listrik dari stop kontak',s:'Tidak ada breaker terpisah',w:null,b:['WAJIB']},
+      {t:'Siapkan ember di luar jendela',s:'Tampung air bilasan kondensor',w:null,b:null},
+    ]},
+    {h:'Fase 2 — Cleaning',items:[
+      {t:'Buka grille/front panel',s:'Simpan sekrup.',w:null,b:null},
+      {t:'Lepas & cuci filter',s:'Siram belakang ke depan, bilas, angin-anginkan',w:null,b:null},
+      {t:'Bersihkan evaporator — lindungi PCB dulu',s:'Coil cleaner searah sirip.',w:'PCB di sisi kanan/kiri — tutup plastik dulu',b:null},
+      {t:'Semprot kondensor dari dalam ke luar',s:'Ember harus sudah siap.',w:'JANGAN semprot luar ke dalam',b:null},
+      {t:'Bersihkan base pan & pasang kembali panel',s:'Kencangkan semua kait/sekrup.',w:'Base pan tersumbat = air bocor ke ruangan',b:null},
+    ]},
+    {h:'Fase 3 — Test run (min. 30 menit)',items:[
+      {t:'Nyalakan — cek dari dalam & dari luar',s:'Dalam: tidak ada tetes. Luar: air ke base pan.',w:'Bocor sering muncul setelah 10–15 mnt',b:['JANGAN DITINGGAL']},
+    ]},
+  ]},
+};
+
+// ══ CLEANING PARAMS ══
+const CLP={
+  before:[
+    {n:'Suhu ruang',s:'26–34°C',u:'°C',t:'num'},
+    {n:'Suhu hembusan',s:'8–12°C lebih rendah',u:'°C',t:'num'},
+    {n:'Delta T',s:'8–12°C',u:'°C',t:'num'},
+    {n:'Airflow',s:'Kuat & merata',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+    {n:'Evaporator',s:'Bersih & sirip terbuka',u:'',t:'sel',o:['Bersih','Kotor','Icing']},
+    {n:'Filter',s:'Bersih',u:'',t:'sel',o:['Bersih','Debu ringan','Berat']},
+    {n:'Blower',s:'Stabil & halus',u:'',t:'sel',o:['Normal','Bunyi','Getar']},
+    {n:'Drain',s:'Lancar',u:'',t:'sel',o:['Lancar','Mampet','Netes']},
+    {n:'Suction',s:'Dingin & berkeringat ringan',u:'',t:'sel',o:['Normal','Kurang dingin','Es']},
+    {n:'Outdoor fan',s:'Stabil',u:'',t:'sel',o:['Normal','Lemah','Bunyi']},
+    {n:'Kondensor',s:'Bersih',u:'',t:'sel',o:['Bersih','Kotor ringan','Berat']},
+    {n:'Ampere',s:'Sesuai spesifikasi',u:'A',t:'num'},
+    {n:'Tekanan refrigerant',s:'Normal sesuai freon',u:'Psi',t:'num'},
+    {n:'Frosting/Icing',s:'Tidak ada',u:'',t:'yn'},
+  ],
+  airflow:[
+    {n:'Hembusan udara',s:'Kuat',u:'',t:'txt'},
+    {n:'Distribusi udara',s:'Merata',u:'',t:'txt'},
+    {n:'Lemparan airflow',s:'Jauh & stabil',u:'',t:'txt'},
+    {n:'Bunyi blower',s:'Halus',u:'',t:'txt'},
+    {n:'Getaran blower',s:'Tidak ada',u:'',t:'yn'},
+  ],
+  drain:[
+    {n:'Aliran drain',s:'Lancar',u:'',t:'sel',o:['Lancar','Lambat','Mampet']},
+    {n:'Test tuang air',s:'Mengalir sempurna',u:'',t:'sel',o:['Sempurna','Lambat','Mampet']},
+    {n:'Drain hose',s:'Tidak tertekuk',u:'',t:'yn'},
+    {n:'Indoor netes',s:'Tidak ada',u:'',t:'yn'},
+  ],
+  suction:[
+    {n:'Suhu suction',s:'Dingin stabil',u:'°C',t:'num'},
+    {n:'Kondisi pipa',s:'Berkeringat ringan',u:'',t:'sel',o:['Normal','Kering','Berembun lebat']},
+    {n:'Frosting suction',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Suction terlalu panas',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Suction ber-es',s:'Tidak ada',u:'',t:'yn'},
+  ],
+  evap:[
+    {n:'Sirip evaporator',s:'Bersih & terbuka',u:'',t:'sel',o:['Bersih','Kotor ringan','Kotor berat']},
+    {n:'Airflow antar sirip',s:'Lancar',u:'',t:'sel',o:['Lancar','Terhambat','Tersumbat']},
+    {n:'Lendir/jamur',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Icing',s:'Tidak ada',u:'',t:'yn'},
+  ],
+  blower:[
+    {n:'Putaran blower',s:'Stabil',u:'',t:'sel',o:['Stabil','Tidak stabil','Lemah']},
+    {n:'Wobble/getaran',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Bunyi blower',s:'Halus',u:'',t:'txt'},
+    {n:'Sudu blower',s:'Bersih',u:'',t:'sel',o:['Bersih','Kotor']},
+    {n:'Balance blower',s:'Center',u:'',t:'sel',o:['Normal','Tidak center']},
+  ],
+  outdoor:[
+    {n:'Fan outdoor',s:'Stabil',u:'',t:'sel',o:['Stabil','Lemah','Tidak stabil']},
+    {n:'Bunyi outdoor',s:'Halus',u:'',t:'txt'},
+    {n:'Kondensor',s:'Bersih',u:'',t:'sel',o:['Bersih','Kotor']},
+    {n:'Hembusan panas',s:'Normal',u:'',t:'sel',o:['Normal','Lemah','Sangat panas']},
+    {n:'Getaran outdoor',s:'Normal',u:'',t:'yn'},
+  ],
+  after:[
+    {n:'Suhu ruang after',s:'24–30°C',u:'°C',t:'num'},
+    {n:'Suhu hembusan after',s:'8–12°C lebih rendah',u:'°C',t:'num'},
+    {n:'Delta T after',s:'8–12°C',u:'°C',t:'num'},
+    {n:'Airflow after',s:'Kuat & merata',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+    {n:'Drain after',s:'Lancar',u:'',t:'sel',o:['Lancar','Mampet','Netes']},
+    {n:'Bunyi after',s:'Tidak abnormal',u:'',t:'sel',o:['Normal','Ada bunyi']},
+    {n:'Icing after',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Running test',s:'10–15 menit',u:'menit',t:'num'},
+    {n:'Indoor netes',s:'Tidak ada',u:'',t:'yn'},
+    {n:'Baut & cover',s:'Presisi',u:'',t:'sel',o:['Normal','Tidak presisi']},
+    {n:'Area kerja',s:'Bersih',u:'',t:'sel',o:['Bersih','Tidak bersih']},
+  ],
+};
+
+// ══ SERVICE DATA ══
+const KELUHAN_LIST=['Tidak dingin','Kurang dingin','Netes','Bunyi','Outdoor mati','Kompresor mati','MCB turun','Bau','Error code','Remote tidak respon'];
+const SVC_BEFORE=[
+  {n:'Tegangan listrik',s:'200–240V',u:'V',t:'num'},
+  {n:'Suhu ruang',s:'26–34°C',u:'°C',t:'num'},
+  {n:'Suhu hembusan',s:'8–12°C lebih rendah',u:'°C',t:'num'},
+  {n:'Delta T',s:'8–12°C',u:'°C',t:'num'},
+  {n:'Airflow',s:'Kuat & merata',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+  {n:'Suction',s:'Dingin stabil',u:'',t:'sel',o:['Normal','Kurang dingin','Beku/es']},
+  {n:'Tekanan refrigerant',s:'Sesuai freon',u:'Psi',t:'num'},
+  {n:'Ampere kompresor',s:'Sesuai spesifikasi',u:'A',t:'num'},
+  {n:'Outdoor fan',s:'Stabil',u:'',t:'sel',o:['Normal','Lemah','Mati']},
+  {n:'Kondensor',s:'Bersih',u:'',t:'sel',o:['Bersih','Kotor ringan','Kotor berat']},
+  {n:'Frosting/Icing',s:'Tidak ada',u:'',t:'yn'},
+  {n:'Drain',s:'Lancar',u:'',t:'sel',o:['Lancar','Mampet','Netes']},
+  {n:'Bunyi abnormal',s:'Tidak ada',u:'',t:'yn'},
+];
+const SVC_ELEKTRIKAL=[
+  {n:'Kapasitor kompresor',s:'Sesuai µF',u:'µF',t:'num'},
+  {n:'Kapasitor fan',s:'Sesuai µF',u:'µF',t:'num'},
+  {n:'Kontaktor',s:'Normal',u:'',t:'sel',o:['Normal','Aus','Rusak']},
+  {n:'PCB indoor',s:'Normal',u:'',t:'sel',o:['Normal','Error','Rusak']},
+  {n:'PCB outdoor',s:'Normal',u:'',t:'sel',o:['Normal','Error','Rusak']},
+  {n:'Sensor suhu',s:'Normal',u:'',t:'sel',o:['Normal','Error','Rusak']},
+  {n:'Terminal kabel',s:'Tidak gosong',u:'',t:'sel',o:['Normal','Gosong','Longgar']},
+  {n:'Kabel power',s:'Normal',u:'',t:'sel',o:['Normal','Rusak']},
+];
+const SVC_REFRIGERASI=[
+  {n:'Kompresor',s:'Running stabil',u:'',t:'sel',o:['Normal','Lemah','Mati']},
+  {n:'Evaporator',s:'Bersih & dingin merata',u:'',t:'sel',o:['Normal','Kotor','Beku']},
+  {n:'Kondensor',s:'Buang panas normal',u:'',t:'sel',o:['Normal','Kotor','Overheating']},
+  {n:'Kapiler',s:'Tidak restriction',u:'',t:'sel',o:['Normal','Restriction']},
+  {n:'Filter dryer',s:'Normal',u:'',t:'sel',o:['Normal','Tersumbat']},
+  {n:'Kebocoran refrigerant',s:'Tidak ada',u:'',t:'yn'},
+  {n:'Suction pipe',s:'Berkeringat ringan',u:'',t:'sel',o:['Normal','Kering','Beku']},
+  {n:'Discharge pipe',s:'Panas normal',u:'',t:'sel',o:['Normal','Sangat panas','Terlalu dingin']},
+];
+const SVC_AIRFLOW=[
+  {n:'Hembusan udara',s:'Kuat',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+  {n:'Distribusi airflow',s:'Merata',u:'',t:'sel',o:['Merata','Tidak merata']},
+  {n:'Putaran blower',s:'Stabil',u:'',t:'sel',o:['Stabil','Tidak stabil','Lemah']},
+  {n:'Bunyi blower',s:'Halus',u:'',t:'sel',o:['Halus','Ada bunyi','Berisik']},
+  {n:'Getaran blower',s:'Tidak ada',u:'',t:'yn'},
+];
+const TINDAKAN_LIST=['Cleaning evaporator','Cleaning blower','Cleaning outdoor','Isi refrigerant','Vakum sistem','Flushing sistem','Repair kebocoran','Ganti kapasitor','Ganti sensor','Ganti motor fan','Ganti kompresor','Ganti PCB','Perbaikan drain'];
+const SVC_AFTER=[
+  {n:'Tegangan listrik',s:'Stabil',u:'V',t:'num'},
+  {n:'Suhu hembusan',s:'Normal',u:'°C',t:'num'},
+  {n:'Delta T after',s:'8–12°C',u:'°C',t:'num'},
+  {n:'Airflow after',s:'Kuat',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+  {n:'Tekanan refrigerant',s:'Stabil',u:'Psi',t:'num'},
+  {n:'Ampere after',s:'Stabil',u:'A',t:'num'},
+  {n:'Suction after',s:'Dingin stabil',u:'',t:'sel',o:['Normal','Kurang dingin','Beku']},
+  {n:'Icing after',s:'Tidak ada',u:'',t:'yn'},
+  {n:'Bunyi after',s:'Tidak ada',u:'',t:'sel',o:['Normal','Ada bunyi']},
+  {n:'Running test',s:'15–20 menit',u:'menit',t:'num'},
+];
+const SVC_RF=[
+  {k:'Delta T <7°C',v:'Pendinginan lemah'},
+  {k:'Delta T >15°C',v:'Airflow restriction'},
+  {k:'Tekanan rendah',v:'Freon kurang / restriction'},
+  {k:'Ampere tinggi',v:'Kompresor berat'},
+  {k:'Ampere rendah',v:'Kompresor lemah'},
+  {k:'Suction ber-es',v:'Icing / restriction'},
+  {k:'Frosting lokal',v:'Restriction'},
+  {k:'Outdoor overheating',v:'Kondensor/fan problem'},
+  {k:'Bunyi kasar',v:'Bearing / blower / kompresor'},
+];
+const SVC_ANALISA=[
+  {k:'penyebab',l:'Penyebab utama kerusakan'},
+  {k:'komponen',l:'Komponen yang bermasalah'},
+  {k:'tindakan',l:'Tindakan yang dilakukan'},
+  {k:'risiko',l:'Risiko jika tidak diperbaiki'},
+  {k:'rekomendasi',l:'Rekomendasi lanjutan'},
+];
+const SVC_APPR=['Unit sudah dicoba customer','Customer memahami hasil pekerjaan','Customer menyetujui pekerjaan selesai','Dokumentasi lengkap'];
+
+// ══ INSTALASI DATA ══
+const INST_SURVEY=[
+  {n:'Posisi indoor',s:'Aman & airflow optimal',u:'',t:'txt'},
+  {n:'Posisi outdoor',s:'Sirkulasi udara baik',u:'',t:'txt'},
+  {n:'Jarak indoor-outdoor',s:'Sesuai spesifikasi',u:'m',t:'num'},
+  {n:'Jalur drain',s:'Lancar & menurun',u:'',t:'sel',o:['OK','Kurang menurun','Bermasalah']},
+  {n:'Jalur kabel',s:'Aman & rapi',u:'',t:'sel',o:['OK','Perlu adjusting','Bermasalah']},
+  {n:'Struktur dinding',s:'Kokoh',u:'',t:'sel',o:['Kokoh','Cukup','Kurang kokoh']},
+  {n:'Akses service',s:'Mudah',u:'',t:'sel',o:['Mudah','Cukup','Sulit']},
+  {n:'Tegangan listrik',s:'200–240V',u:'V',t:'num'},
+];
+const INST_INDOOR=[
+  {n:'Bracket indoor',s:'Kuat & rata',u:'',t:'sel',o:['OK','Perlu adjusting','Tidak OK']},
+  {n:'Waterpass indoor',s:'Balance',u:'',t:'sel',o:['Balance','Sedikit miring','Miring']},
+  {n:'Baut indoor',s:'Lengkap & kencang',u:'',t:'sel',o:['Lengkap & kencang','Kurang kencang','Kurang baut']},
+  {n:'Posisi indoor',s:'Presisi',u:'',t:'sel',o:['Presisi','Sedikit miring','Tidak presisi']},
+  {n:'Drain indoor',s:'Menurun normal',u:'',t:'sel',o:['Normal','Kurang menurun','Tidak menurun']},
+  {n:'Sambungan flare',s:'Rapat',u:'',t:'sel',o:['Rapat','Perlu dikencangkan','Bocor']},
+  {n:'Insulasi pipa',s:'Rapat',u:'',t:'sel',o:['Rapat','Kurang rapat','Tidak ada']},
+  {n:'Finishing duct/tape',s:'Rapi',u:'',t:'sel',o:['Rapi','Cukup','Tidak rapi']},
+];
+const INST_OUTDOOR=[
+  {n:'Bracket outdoor',s:'Kuat',u:'',t:'sel',o:['Kuat','Cukup','Kurang kuat']},
+  {n:'Baut outdoor',s:'Lengkap & kencang',u:'',t:'sel',o:['Lengkap & kencang','Kurang kencang','Kurang baut']},
+  {n:'Dudukan outdoor',s:'Stabil',u:'',t:'sel',o:['Stabil','Sedikit goyang','Tidak stabil']},
+  {n:'Sirkulasi outdoor',s:'Tidak terhalang',u:'',t:'sel',o:['Tidak terhalang','Sedikit terhalang','Terhalang']},
+  {n:'Jarak belakang outdoor',s:'Sesuai standar',u:'cm',t:'num'},
+  {n:'Getaran outdoor',s:'Normal',u:'',t:'sel',o:['Normal','Sedikit getar','Getar']},
+  {n:'Bunyi outdoor',s:'Halus',u:'',t:'sel',o:['Halus','Ada bunyi','Berisik']},
+];
+const INST_PIPING=[
+  {n:'Pipa refrigerant',s:'Tidak penyok',u:'',t:'sel',o:['Normal','Sedikit penyok','Penyok']},
+  {n:'Panjang pipa',s:'Sesuai kebutuhan',u:'m',t:'num'},
+  {n:'Sambungan flare',s:'Tidak bocor',u:'',t:'sel',o:['Tidak bocor','Perlu cek ulang','Bocor']},
+  {n:'Vakum sistem',s:'Minimal 15–30 menit',u:'menit',t:'num'},
+  {n:'Tekanan vakum',s:'Stabil',u:'',t:'sel',o:['Stabil','Tidak stabil']},
+  {n:'Test kebocoran',s:'Tidak bocor',u:'',t:'sel',o:['Tidak bocor','Ada kebocoran']},
+  {n:'Refrigerant',s:'Sesuai standar',u:'',t:'sel',o:['Sesuai','Lebih','Kurang']},
+];
+const INST_ELEKTRIKAL=[
+  {n:'Kabel power',s:'Sesuai kapasitas',u:'',t:'sel',o:['Sesuai','Tidak sesuai']},
+  {n:'Kabel komunikasi',s:'Normal',u:'',t:'sel',o:['Normal','Rusak']},
+  {n:'Terminal',s:'Kencang & aman',u:'',t:'sel',o:['Kencang & aman','Kurang kencang','Longgar']},
+  {n:'Grounding',s:'Ada & normal',u:'',t:'sel',o:['Ada & normal','Ada tapi lemah','Tidak ada']},
+  {n:'Tegangan listrik',s:'Stabil',u:'V',t:'num'},
+  {n:'MCB',s:'Sesuai kapasitas',u:'',t:'sel',o:['Sesuai','Tidak sesuai']},
+];
+const INST_RUNNING=[
+  {n:'Suhu ruang',s:'26–34°C',u:'°C',t:'num'},
+  {n:'Suhu hembusan',s:'8–12°C lebih rendah',u:'°C',t:'num'},
+  {n:'Delta T',s:'8–12°C',u:'°C',t:'num'},
+  {n:'Airflow',s:'Kuat & merata',u:'',t:'sel',o:['Kuat','Sedang','Lemah']},
+  {n:'Suction',s:'Dingin & berkeringat ringan',u:'',t:'sel',o:['Normal','Kurang dingin','Beku']},
+  {n:'Tekanan refrigerant',s:'Stabil',u:'Psi',t:'num'},
+  {n:'Ampere',s:'Sesuai spesifikasi',u:'A',t:'num'},
+  {n:'Drain',s:'Lancar',u:'',t:'sel',o:['Lancar','Lambat','Mampet']},
+  {n:'Icing',s:'Tidak ada',u:'',t:'yn'},
+  {n:'Bunyi abnormal',s:'Tidak ada',u:'',t:'yn'},
+  {n:'Running test',s:'15–20 menit',u:'menit',t:'num'},
+];
+const INST_FINISHING=[
+  {n:'Finishing pipa',s:'Rapi',u:'',t:'sel',o:['Rapi','Cukup','Tidak rapi']},
+  {n:'Finishing kabel',s:'Rapi',u:'',t:'sel',o:['Rapi','Cukup','Tidak rapi']},
+  {n:'Area kerja',s:'Bersih',u:'',t:'sel',o:['Bersih','Cukup','Tidak bersih']},
+  {n:'Bekas bor',s:'Dibersihkan',u:'',t:'sel',o:['Bersih','Sebagian','Belum dibersihkan']},
+  {n:'Duct/trunking',s:'Presisi',u:'',t:'sel',o:['Presisi','Cukup','Tidak presisi']},
+];
+const INST_RF=[
+  {k:'Delta T <7°C',v:'Pendinginan lemah'},
+  {k:'Delta T >15°C',v:'Airflow restriction'},
+  {k:'Suction ber-es',v:'Restriction / airflow problem'},
+  {k:'Drain tidak lancar',v:'Risiko netes'},
+  {k:'Outdoor panas abnormal',v:'Sirkulasi buruk'},
+  {k:'Ampere tinggi',v:'Beban kompresor berat'},
+  {k:'Bunyi/getaran',v:'Dudukan / blower / outdoor'},
+];
+const INST_ANALISA=[
+  {k:'kendala',l:'Kendala instalasi'},
+  {k:'tindakan',l:'Tindakan yang dilakukan'},
+  {k:'risiko',l:'Risiko yang perlu diperhatikan'},
+  {k:'rekomendasi',l:'Rekomendasi maintenance'},
+];
+const INST_APPR=['Unit sudah dicoba customer','Customer memahami hasil instalasi','Customer menyetujui pekerjaan selesai','Dokumentasi lengkap'];
+
+// ══ TABS CONFIG ══
+const CL_TABS=['cleaning','before','airflow','drain','suction','evap','blower','outdoor','after'];
+const SVC_TABS=['keluhan','before','elektrikal','refrigerasi','airflow','tindakan','after','redflag','analisa','approval'];
+const INST_TABS=['survey','indoor','outdoor','piping','elektrikal','running','finishing','redflag','analisa','approval'];
+
+const CL_LBL={cleaning:'Langkah',before:'Before',airflow:'Airflow',drain:'Drain',suction:'Suction',evap:'Evap',blower:'Blower',outdoor:'Outdoor',after:'After'};
+const SVC_LBL={keluhan:'Keluhan',before:'Diagnosa',elektrikal:'Elektrikal',refrigerasi:'Refrigerasi',airflow:'Airflow',tindakan:'Tindakan',after:'After',redflag:'Red Flag',analisa:'Analisa',approval:'Approval'};
+const INST_LBL={survey:'Survey',indoor:'Indoor',outdoor:'Outdoor',piping:'Piping',elektrikal:'Elektrikal',running:'Running Test',finishing:'Finishing',redflag:'Red Flag',analisa:'Analisa',approval:'Approval'};
+
+function getTabs(){return curJob==='cleaning'?CL_TABS:curJob==='service'?SVC_TABS:curJob==='freon'?FR_TABS:INST_TABS;}
+function getLbls(){return curJob==='cleaning'?CL_LBL:curJob==='service'?SVC_LBL:curJob==='freon'?FR_LBL:INST_LBL;}
+
+// ══ STATE ══
+let curJob='',curAC='',curTab=0,lastData=null;
+let ckState={},pVals={},keluhan={},keluhanLain='',tindakan={},tindakanLain='',analisa={},approval={};
+
+function initState(){
+  ckState={};pVals={};keluhan={};keluhanLain='';tindakan={};tindakanLain='';analisa={};approval={};
+}
+
+// ══ NAVIGATION ══
+function go(id){
+  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='s-home'){loadSetup();checkBanner();loadHist();}
+  if(id==='s-setup')loadSetup();
+}
+
+function pickJob(job){
+  curJob=job;
+  document.querySelectorAll('.jtype-card').forEach(c=>{c.classList.remove('sel');c.className=c.className.replace(/ sel/g,'');});
+  const card=document.getElementById('jc-'+job);
+  card.classList.add('sel');
+  if(job==='cleaning')card.classList.add('c');
+  else if(job==='service')card.classList.add('s');
+  else if(job==='freon'){card.style.borderColor='var(--rd)';card.style.background='var(--rl)';}
+  else card.classList.add('i');
+}
+
+function pickAC(ac){
+  if(!curJob){alert('Pilih jenis pekerjaan dulu!');return;}
+  curAC=ac;initState();
+  document.getElementById('info-h').textContent=JOB_LABELS[curJob]+' — '+AC_LABELS[ac];
+  document.getElementById('info-sub').textContent=JOB_LABELS[curJob];
+  const defTek=localStorage.getItem('hcs_tek')||'';
+  if(defTek)document.getElementById('f-tek').value=defTek;
+  // Show jenis instalasi field only for instalasi job
+  document.getElementById('f-jenis-inst-row').style.display=curJob==='instalasi'?'block':'none';
+  if(curJob==='freon'){document.getElementById('f-helper-row').style.display='none';}else{document.getElementById('f-helper-row').style.display='block';}
+  const btnColors={cleaning:'var(--bd)',service:'var(--am)',instalasi:'var(--pd)',freon:'var(--rd)'};
+  document.getElementById('btn-start').style.background=btnColors[curJob];
+  go('s-info');
+}
+
+function startForm(){
+  document.getElementById('form-h').textContent=AC_LABELS[curAC]+' — '+JOB_LABELS[curJob];
+  document.getElementById('form-sub').textContent=document.getElementById('f-pel').value||'';
+  buildTabs();curTab=0;renderTab(0);go('s-form');
+}
+
+// ══ TABS ══
+function buildTabs(){
+  const el=document.getElementById('tabs');el.innerHTML='';
+  getTabs().forEach((t,i)=>{
+    const d=document.createElement('div');
+    d.className='tab'+(i===0?' on':'');d.id='tab-'+i;
+    d.textContent=getLbls()[t];
+    d.onclick=()=>renderTab(i);el.appendChild(d);
+  });
+}
+
+function activateTab(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  document.getElementById('tab-'+i)?.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+  document.getElementById('btn-prev').style.display=i===0?'none':'flex';
+  const tabs=getTabs();
+  const isLast=i===tabs.length-1;
+  document.getElementById('btn-next').textContent=isLast?'Selesaikan ✓':'Berikutnya →';
+  const btnColors={cleaning:'var(--bd)',service:'var(--am)',instalasi:'var(--pd)',freon:'var(--rd)'};
+  document.getElementById('btn-next').style.background=isLast?'var(--tm)':btnColors[curJob];
+}
+
+function renderTab(i){
+  curTab=i;activateTab(i);
+  document.getElementById('form-body').innerHTML='';
+  const sid=getTabs()[i];
+  document.getElementById('pg-lbl').textContent=getLbls()[sid];
+  if(curJob==='cleaning')renderCL(sid);
+  else if(curJob==='service')renderSVC(sid);
+  else if(curJob==='freon')renderFR(sid);
+  else renderINST(sid);
+  updPg();window.scrollTo(0,0);
+}
+
+function prevTab(){if(curTab>0)renderTab(curTab-1);}
+function nextTab(){const t=getTabs();if(curTab<t.length-1)renderTab(curTab+1);else finishJob();}
+function doSave(btn){btn.textContent='✓';setTimeout(()=>btn.textContent='💾',1500);}
+
+// ══ CLEANING RENDER ══
+function renderCL(sid){
+  const body=document.getElementById('form-body');
+  if(sid==='cleaning'){renderCLSteps(body);return;}
+  const hdrBg={before:'var(--bl)',airflow:'var(--bl)',drain:'var(--bl)',suction:'var(--bl)',evap:'var(--bl)',blower:'var(--bl)',outdoor:'var(--bl)',after:'var(--tl)'};
+  const hdrFg={before:'var(--bd)',airflow:'var(--bd)',drain:'var(--bd)',suction:'var(--bd)',evap:'var(--bd)',blower:'var(--bd)',outdoor:'var(--bd)',after:'var(--td)'};
+  const titles={before:'1. Parameter Before Cleaning',airflow:'2. Checklist Airflow',drain:'3. Checklist Drain',suction:'4. Checklist Suction',evap:'5. Checklist Evaporator',blower:'6. Checklist Blower',outdoor:'7. Checklist Outdoor',after:'8. Parameter After Cleaning'};
+  mkSecHdr(body,titles[sid],hdrBg[sid],hdrFg[sid]);
+  if(!pVals[sid])pVals[sid]={};
+  mkParamTable(body,CLP[sid]||[],sid);
+}
+
+function renderCLSteps(body){
+  let n=0;
+  (CL_STEPS[curAC]?.fases||[]).forEach(fase=>{
+    const fh=document.createElement('div');fh.className='fase-h';fh.textContent=fase.h.toUpperCase();body.appendChild(fh);
+    fase.items.forEach(itm=>{
+      n++;const idx=n;
+      const el=document.createElement('div');
+      el.className='ck-row'+(ckState[idx]?' done':'');el.id='ck-'+idx;
+      el.onclick=()=>toggleCk(idx,el);
+      const bHtml=(itm.b||[]).map(b=>`<span class="bdg ${['WAJIB','PERTAMA & WAJIB','JANGAN DITINGGAL','LINDUNGI PCB'].includes(b)?'bdg-r':b.includes('<')?'bdg-g':'bdg-b'}">${b}</span>`).join('');
+      el.innerHTML=`<div class="ck-box${ckState[idx]?' on':''}" id="cb-${idx}">${ckState[idx]?'✓':''}</div><div style="flex:1"><div class="itm-t">${idx}. ${itm.t}</div><div class="itm-s">${itm.s}</div>${bHtml}${itm.w?`<div class="itm-w">⚠ ${itm.w}</div>`:''}</div>`;
+      body.appendChild(el);
+    });
+  });
+}
+
+function toggleCk(idx,el){
+  ckState[idx]=!ckState[idx];
+  const cb=document.getElementById('cb-'+idx);
+  if(ckState[idx]){cb.classList.add('on');cb.textContent='✓';el.classList.add('done');}
+  else{cb.classList.remove('on');cb.textContent='';el.classList.remove('done');}
+  updPg();
+}
+
+// ══ SERVICE RENDER ══
+function renderSVC(sid){
+  const body=document.getElementById('form-body');
+  if(sid==='keluhan'){mkSecHdr(body,'2. Keluhan Customer','var(--al)','var(--ad)');mkKeluhan(body,KELUHAN_LIST,keluhan,'keluhan');return;}
+  if(sid==='before'){mkSecHdr(body,'3. Parameter Diagnosis Before Service','var(--al)','var(--ad)');if(!pVals.before)pVals.before={};mkParamTable(body,SVC_BEFORE,'before');return;}
+  if(sid==='elektrikal'){mkSecHdr(body,'4. Checklist Komponen Elektrikal','var(--al)','var(--ad)');if(!pVals.elektrikal)pVals.elektrikal={};mkParamTable(body,SVC_ELEKTRIKAL,'elektrikal');return;}
+  if(sid==='refrigerasi'){mkSecHdr(body,'5. Checklist Komponen Refrigerasi','var(--al)','var(--ad)');if(!pVals.refrigerasi)pVals.refrigerasi={};mkParamTable(body,SVC_REFRIGERASI,'refrigerasi');return;}
+  if(sid==='airflow'){mkSecHdr(body,'6. Checklist Airflow & Blower','var(--al)','var(--ad)');if(!pVals.svc_airflow)pVals.svc_airflow={};mkParamTable(body,SVC_AIRFLOW,'svc_airflow');return;}
+  if(sid==='tindakan'){mkSecHdr(body,'7. Tindakan Service','var(--al)','var(--ad)');mkTindakan(body,TINDAKAN_LIST,tindakan,'tindakan');return;}
+  if(sid==='after'){mkSecHdr(body,'8. Parameter After Service','var(--tl)','var(--td)');if(!pVals.svc_after)pVals.svc_after={};mkParamTable(body,SVC_AFTER,'svc_after');return;}
+  if(sid==='redflag'){mkRedFlag(body,SVC_RF,'service');return;}
+  if(sid==='analisa'){mkAnalisa(body,SVC_ANALISA,'10. Analisa Teknisi');return;}
+  if(sid==='approval'){mkApproval(body,SVC_APPR,'11. Approval Customer');return;}
+}
+
+// ══ INSTALASI RENDER ══
+function renderFR(sid){
+  const body=document.getElementById('form-body');
+  const bg='var(--rl)',fg='var(--rd)';
+  const titles={
+    param_awal:'1. Parameter & Indikasi Awal',
+    deteksi:'2. Deteksi Titik Bocor',
+    repair:'3. Repair Kebocoran',
+    pressure:'4. Pressure Holding Test (Nitrogen)',
+    vacuum:'5. Vacuum Validation',
+    charging:'6. Final Charging Freon',
+    running:'7. Running Validation & Final Check',
+  };
+  if(sid==='param_awal'){mkSecHdr(body,titles.param_awal,bg,fg);if(!pVals.fr_param)pVals.fr_param={};mkParamTable(body,FR_PARAM_AWAL,'fr_param');return;}
+  if(sid==='deteksi'){
+    mkSecHdr(body,titles.deteksi,bg,fg);
+    const note=document.createElement('div');note.className='banner danger';note.style.margin='8px 16px';
+    note.innerHTML='<b>NORMAL:</b> Tidak ada bubble aktif &nbsp;|&nbsp; <b>BOCOR:</b> Bubble muncul terus menerus';
+    body.appendChild(note);
+    if(!pVals.fr_deteksi)pVals.fr_deteksi={};mkParamTable(body,FR_DETEKSI,'fr_deteksi');
+    const lokasi=document.createElement('div');lokasi.className='f';lokasi.style.marginTop='8px';
+    lokasi.innerHTML=`<label>Lokasi titik bocor (deskripsikan)</label><input type="text" placeholder="Contoh: flare indoor kanan atas..." oninput="analisa.lokasi_bocor=this.value" value="${analisa.lokasi_bocor||''}">`;
+    body.appendChild(lokasi);return;
+  }
+  if(sid==='repair'){mkSecHdr(body,titles.repair,bg,fg);if(!pVals.fr_repair)pVals.fr_repair={};mkParamTable(body,FR_REPAIR,'fr_repair');return;}
+  if(sid==='pressure'){
+    mkSecHdr(body,titles.pressure,bg,fg);
+    const note=document.createElement('div');note.className='banner warn';note.style.margin='8px 16px';
+    note.innerHTML='Standar tekanan nitrogen: <b>R22: 150–250 Psi</b> &nbsp;|&nbsp; <b>R32 & R410A: 300–500 Psi</b>';
+    body.appendChild(note);
+    if(!pVals.fr_pressure)pVals.fr_pressure={};mkParamTable(body,FR_PRESSURE,'fr_pressure');return;
+  }
+  if(sid==='vacuum'){mkSecHdr(body,titles.vacuum,bg,fg);if(!pVals.fr_vacuum)pVals.fr_vacuum={};mkParamTable(body,FR_VACUUM,'fr_vacuum');return;}
+  if(sid==='charging'){mkSecHdr(body,titles.charging,bg,fg);if(!pVals.fr_charging)pVals.fr_charging={};mkParamTable(body,FR_CHARGING,'fr_charging');return;}
+  if(sid==='running'){
+    mkSecHdr(body,titles.running,bg,fg);
+    if(!pVals.fr_running)pVals.fr_running={};mkParamTable(body,FR_RUNNING,'fr_running');
+    // Red flag
+    const rfhdr=document.createElement('div');rfhdr.style.cssText='padding:9px 16px 6px;font-size:12px;font-weight:700;background:var(--rl);color:var(--rd);margin-top:8px';
+    rfhdr.textContent='⚠ Red Flag — Unit BELUM BOLEH dinyatakan selesai jika:';body.appendChild(rfhdr);
+    const tbl=document.createElement('table');tbl.className='ptbl';
+    tbl.innerHTML='<thead><tr><th>Kondisi</th><th>Indikasi</th></tr></thead><tbody>'+FR_REDFLAG.map(r=>`<tr><td style="font-weight:600;color:var(--rd)">${r.k}</td><td style="color:var(--text2)">${r.v}</td></tr>`).join('')+'</tbody>';
+    body.appendChild(tbl);
+    // Approval
+    mkSecHdr(body,'Approval Customer',bg.replace('rl','tl'),fg.replace('rd','td'));
+    FR_APPR.forEach((lbl,i)=>{
+      const row=document.createElement('div');row.className='ap-row';
+      const y=approval[i]===1,n=approval[i]===0;
+      row.innerHTML=`<span class="ap-lbl" style="font-size:12px">${lbl}</span><div class="ap-btns"><button class="ap-btn y${y?' on':''}" onclick="setAppr(${i},1,this)">Ya</button><button class="ap-btn n${n?' on':''}" onclick="setAppr(${i},0,this)">Tidak</button></div>`;
+      body.appendChild(row);
+    });
+    // Analisa
+    const ana=document.createElement('div');ana.className='f';ana.style.marginTop='8px';
+    ana.innerHTML=`<label>Catatan teknisi / temuan lain</label><textarea rows="2" placeholder="Catatan tambahan..." oninput="analisa.catatan=this.value">${analisa.catatan||''}</textarea>`;
+    body.appendChild(ana);
+    return;
+  }
+}
+
+function renderINST(sid){
+  const body=document.getElementById('form-body');
+  const bg='var(--pl)',fg='var(--pd)';
+  if(sid==='survey'){mkSecHdr(body,'2. Survey Lokasi Instalasi',bg,fg);if(!pVals.survey)pVals.survey={};mkParamTable(body,INST_SURVEY,'survey');return;}
+  if(sid==='indoor'){mkSecHdr(body,'3. Checklist Pemasangan Indoor',bg,fg);if(!pVals.indoor)pVals.indoor={};mkParamTable(body,INST_INDOOR,'indoor');return;}
+  if(sid==='outdoor'){mkSecHdr(body,'4. Checklist Pemasangan Outdoor',bg,fg);if(!pVals.i_outdoor)pVals.i_outdoor={};mkParamTable(body,INST_OUTDOOR,'i_outdoor');return;}
+  if(sid==='piping'){mkSecHdr(body,'5. Checklist Piping & Refrigerant',bg,fg);if(!pVals.piping)pVals.piping={};mkParamTable(body,INST_PIPING,'piping');return;}
+  if(sid==='elektrikal'){mkSecHdr(body,'6. Checklist Elektrikal',bg,fg);if(!pVals.i_elek)pVals.i_elek={};mkParamTable(body,INST_ELEKTRIKAL,'i_elek');return;}
+  if(sid==='running'){mkSecHdr(body,'7. Parameter Running Test After Installation',bg,fg);if(!pVals.running)pVals.running={};mkParamTable(body,INST_RUNNING,'running');return;}
+  if(sid==='finishing'){mkSecHdr(body,'8. Checklist Finishing',bg,fg);if(!pVals.finishing)pVals.finishing={};mkParamTable(body,INST_FINISHING,'finishing');return;}
+  if(sid==='redflag'){mkRedFlag(body,INST_RF,'instalasi');return;}
+  if(sid==='analisa'){mkAnalisa(body,INST_ANALISA,'10. Analisa Teknisi');return;}
+  if(sid==='approval'){mkApproval(body,INST_APPR,'11. Approval Customer');return;}
+}
+
+// ══ SHARED UI BUILDERS ══
+function mkSecHdr(body,title,bg,fg){
+  const d=document.createElement('div');
+  d.style.cssText=`padding:9px 16px 6px;font-size:12px;font-weight:700;background:${bg};color:${fg}`;
+  d.textContent=title;body.appendChild(d);
+}
+
+function mkParamTable(body,params,sid){
+  const tbl=document.createElement('table');tbl.className='ptbl';
+  const thead=document.createElement('thead');
+  thead.innerHTML='<tr><th>Parameter</th><th>Nilai Aktual</th><th class="ok-c">✓</th><th class="no-c">✗</th></tr>';
+  tbl.appendChild(thead);
+  const tbody=document.createElement('tbody');
+  params.forEach((p,i)=>{
+    if(!pVals[sid])pVals[sid]={};
+    const sv=pVals[sid][i]||{val:'',ok:null};
+    const tr=document.createElement('tr');
+    const tdN=document.createElement('td');
+    tdN.innerHTML=`<div class="p-name">${p.n}</div><div class="p-std">${p.s}${p.u?' ('+p.u+')':''}</div>`;
+    const tdV=document.createElement('td');
+    let inp='';
+    if(p.t==='num'){
+      inp=`<div style="display:flex;align-items:center;gap:3px"><input class="pv pv-num" type="number" value="${sv.val||''}" placeholder="—" oninput="setV('${sid}',${i},this.value)"><span style="font-size:10px;color:var(--text2)">${p.u}</span></div>`;
+    }else if(p.t==='sel'){
+      inp=`<select class="pv" onchange="setV('${sid}',${i},this.value)"><option value="">— pilih —</option>${(p.o||[]).map(o=>`<option value="${o}"${sv.val===o?' selected':''}>${o}</option>`).join('')}</select>`;
+    }else if(p.t==='yn'){
+      inp=`<div class="rg"><label><input type="radio" name="yn-${sid}-${i}" value="Ada" ${sv.val==='Ada'?'checked':''} onchange="setV('${sid}',${i},'Ada')"> Ada</label><label><input type="radio" name="yn-${sid}-${i}" value="Tidak ada" ${sv.val==='Tidak ada'?'checked':''} onchange="setV('${sid}',${i},'Tidak ada')"> Tidak ada</label></div>`;
+    }else{
+      inp=`<input class="pv" type="text" value="${sv.val||''}" placeholder="—" oninput="setV('${sid}',${i},this.value)">`;
+    }
+    tdV.innerHTML=inp;
+    const tdOk=document.createElement('td');tdOk.className='ok-c';
+    tdOk.innerHTML=`<input type="radio" name="ok-${sid}-${i}" ${sv.ok===1?'checked':''} onchange="setOk('${sid}',${i},1)">`;
+    const tdNo=document.createElement('td');tdNo.className='no-c';
+    tdNo.innerHTML=`<input type="radio" name="ok-${sid}-${i}" ${sv.ok===0?'checked':''} onchange="setOk('${sid}',${i},0)">`;
+    tr.appendChild(tdN);tr.appendChild(tdV);tr.appendChild(tdOk);tr.appendChild(tdNo);
+    tbody.appendChild(tr);
+  });
+  tbl.appendChild(tbody);body.appendChild(tbl);
+}
+
+function setV(sid,i,v){if(!pVals[sid])pVals[sid]={};if(!pVals[sid][i])pVals[sid][i]={val:'',ok:null};pVals[sid][i].val=v;}
+function setOk(sid,i,v){if(!pVals[sid])pVals[sid]={};if(!pVals[sid][i])pVals[sid][i]={val:'',ok:null};pVals[sid][i].ok=v;updPg();document.getElementById('tab-'+curTab).classList.toggle('done',calcPct(getTabs()[curTab])===100);}
+
+function mkKeluhan(body,list,state,stateKey){
+  list.forEach((k,i)=>{
+    const row=document.createElement('div');row.className='kl-row';
+    const on=state[i]||false;
+    row.innerHTML=`<span style="font-size:13px;font-weight:500">${k}</span><div class="kl-box${on?' on':''}">✓</div>`;
+    row.onclick=()=>{state[i]=!state[i];const b=row.querySelector('.kl-box');b.classList.toggle('on',state[i]);updPg();};
+    body.appendChild(row);
+  });
+  const lain=document.createElement('div');lain.className='f';
+  lain.innerHTML=`<label>Lainnya</label><input type="text" value="${keluhanLain}" placeholder="Keluhan lainnya..." oninput="keluhanLain=this.value">`;
+  body.appendChild(lain);
+}
+
+function mkTindakan(body,list,state,stateKey){
+  list.forEach((t,i)=>{
+    const row=document.createElement('div');row.className='td-row';
+    const on=state[i]||false;
+    row.innerHTML=`<span style="font-size:13px;font-weight:500">${t}</span><div class="td-box${on?' on':''}">✓</div>`;
+    row.onclick=()=>{state[i]=!state[i];const b=row.querySelector('.td-box');b.classList.toggle('on',state[i]);updPg();};
+    body.appendChild(row);
+  });
+  const lain=document.createElement('div');lain.className='f';
+  lain.innerHTML=`<label>Lainnya</label><input type="text" value="${tindakanLain}" placeholder="Tindakan lainnya..." oninput="tindakanLain=this.value">`;
+  body.appendChild(lain);
+}
+
+function mkRedFlag(body,rfs,jobType){
+  const color=jobType==='instalasi'?'var(--pd)':'var(--rd)';
+  const bg=jobType==='instalasi'?'var(--pl)':'var(--rl)';
+  mkSecHdr(body,'9. Red Flag — Wajib Analisa Lanjut',bg,color);
+  const note=document.createElement('div');note.className='banner warn';note.style.margin='8px 16px';
+  note.textContent='Jika kondisi di bawah ditemukan, wajib laporkan ke katek & isi analisa teknisi.';body.appendChild(note);
+  const tbl=document.createElement('table');tbl.className='ptbl';
+  tbl.innerHTML=`<thead><tr><th>Kondisi</th><th>Indikasi</th></tr></thead><tbody>${rfs.map(r=>`<tr><td style="font-weight:600;color:${color}">${r.k}</td><td style="color:var(--text2)">${r.v}</td></tr>`).join('')}</tbody>`;
+  body.appendChild(tbl);
+  const note2=document.createElement('div');note2.className='f';note2.style.marginTop='8px';
+  note2.innerHTML=`<label>Red flag yang ditemukan (jika ada)</label><textarea rows="2" placeholder="Tuliskan kondisi red flag yang ditemukan..." oninput="analisa.redflag=this.value">${analisa.redflag||''}</textarea>`;
+  body.appendChild(note2);
+}
+
+function mkAnalisa(body,fields,title){
+  mkSecHdr(body,title,'var(--al)','var(--ad)');
+  fields.forEach(fld=>{
+    const row=document.createElement('div');row.className='ana-row';
+    row.innerHTML=`<label>${fld.l}</label><textarea rows="2" placeholder="Isi keterangan..." oninput="analisa['${fld.k}']=this.value">${analisa[fld.k]||''}</textarea>`;
+    body.appendChild(row);
+  });
+}
+
+function mkApproval(body,list,title){
+  mkSecHdr(body,title,'var(--tl)','var(--td)');
+  list.forEach((lbl,i)=>{
+    const row=document.createElement('div');row.className='ap-row';
+    const y=approval[i]===1,n=approval[i]===0;
+    row.innerHTML=`<span class="ap-lbl">${lbl}</span><div class="ap-btns"><button class="ap-btn y${y?' on':''}" onclick="setAppr(${i},1,this)">Ya</button><button class="ap-btn n${n?' on':''}" onclick="setAppr(${i},0,this)">Tidak</button></div>`;
+    body.appendChild(row);
+  });
+  const cf=document.createElement('div');cf.className='f';cf.style.marginTop='8px';
+  cf.innerHTML=`<label>Nama customer (konfirmasi)</label><input type="text" value="${document.getElementById('f-pel').value}" placeholder="Nama customer">`;
+  body.appendChild(cf);
+}
+
+function setAppr(i,v,btn){
+  approval[i]=v;
+  btn.closest('.ap-btns').querySelectorAll('.ap-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');updPg();
+}
+
+// ══ PROGRESS ══
+function totalCk(){let t=0;(CL_STEPS[curAC]?.fases||[]).forEach(f=>t+=f.items.length);return t;}
+function doneCk(){return Object.values(ckState).filter(Boolean).length;}
+
+function getParamsForSid(sid){
+  if(curJob==='cleaning')return CLP[sid]||[];
+  if(curJob==='service'){
+    const m={before:SVC_BEFORE,elektrikal:SVC_ELEKTRIKAL,refrigerasi:SVC_REFRIGERASI,svc_airflow:SVC_AIRFLOW,svc_after:SVC_AFTER};
+    return m[sid]||[];
+  }
+  const m={survey:INST_SURVEY,indoor:INST_INDOOR,i_outdoor:INST_OUTDOOR,piping:INST_PIPING,i_elek:INST_ELEKTRIKAL,running:INST_RUNNING,finishing:INST_FINISHING};
+  return m[sid]||[];
+}
+
+function calcPct(sid){
+  if(sid==='cleaning'){const tot=totalCk();return tot?Math.round(doneCk()/tot*100):0;}
+  if(['keluhan','tindakan','redflag','analisa','approval','survey','indoor','outdoor','piping','elektrikal','running','finishing','deteksi','repair','pressure','vacuum','charging'].includes(sid))return 1;
+  const params=getParamsForSid(sid);
+  const tot=params.length;if(!tot)return 100;
+  const pkey=sid;
+  const done=pVals[pkey]?Object.values(pVals[pkey]).filter(v=>v.ok===0||v.ok===1).length:0;
+  return Math.round(done/tot*100);
+}
+
+function updPg(){
+  const sid=getTabs()[curTab];
+  const pct=calcPct(sid);
+  document.getElementById('pg-pct').textContent=pct+'%';
+  document.getElementById('pg-fill').style.width=pct+'%';
+}
+
+// ══ FINISH ══
+function cntOk(sid){return pVals[sid]?Object.values(pVals[sid]).filter(v=>v.ok===1).length:0;}
+function cntNo(sid){return pVals[sid]?Object.values(pVals[sid]).filter(v=>v.ok===0).length:0;}
+
+function finishJob(){
+  const tgl=document.getElementById('f-tgl').value;
+  const tglFmt=tgl?new Date(tgl).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}):'-';
+  const pel=document.getElementById('f-pel').value||'—';
+  const tek=document.getElementById('f-tek').value||'—';
+
+  let okB=0,noB=0,okA=0,noA=0,ckD=0,ckT=0;
+  if(curJob==='cleaning'){
+    ckD=doneCk();ckT=totalCk();
+    okB=cntOk('before');noB=cntNo('before');
+    okA=cntOk('after');noA=cntNo('after');
+  }else if(curJob==='service'){
+    okB=cntOk('before');noB=cntNo('before');
+    okA=cntOk('svc_after');noA=cntNo('svc_after');
+  }else if(curJob==='freon'){
+    okB=cntOk('fr_param');noB=cntNo('fr_param');
+    okA=cntOk('fr_running');noA=cntNo('fr_running');
+  }else{
+    okB=cntOk('survey');noB=cntNo('survey');
+    okA=cntOk('running');noA=cntNo('running');
+  }
+
+  const keluhanList=KELUHAN_LIST.filter((_,i)=>keluhan[i]);
+  const tindakanList=TINDAKAN_LIST.filter((_,i)=>tindakan[i]);
+
+  lastData={
+    id:'HCS-'+Date.now(),jobType:curJob,jobLabel:JOB_LABELS[curJob],
+    acType:curAC,acLabel:AC_LABELS[curAC],
+    pel,lok:document.getElementById('f-lok').value||'—',
+    hp:document.getElementById('f-hp').value||'',
+    mrk:document.getElementById('f-mrk').value||'—',
+    pk:document.getElementById('f-pk').value,
+    freon:document.getElementById('f-freon').value||'',
+    sn:document.getElementById('f-sn').value||'',
+    helper:document.getElementById('f-helper').value||'',
+    jenisInst:curJob==='instalasi'?(document.getElementById('f-jenis-inst').value||''):'',
+    tek,tgl,jam:document.getElementById('f-jam').value,
+    ckD,ckT,okB,noB,okA,noA,
+    keluhan:keluhanList,keluhanLain,
+    tindakan:tindakanList,tindakanLain,
+    analisa:{...analisa},
+    pVals:JSON.parse(JSON.stringify(pVals)),
+    ts:Date.now(),status:'selesai'
+  };
+
+  const jobColors={cleaning:'var(--tl)',service:'var(--al)',instalasi:'var(--pl)'};
+  document.getElementById('done-ring').style.background=jobColors[curJob];
+  document.getElementById('done-sub').textContent=AC_LABELS[curAC]+' — '+JOB_LABELS[curJob]+' · '+pel;
+
+  if(curJob==='cleaning'){
+    document.getElementById('st-la').textContent='Langkah';
+    document.getElementById('st-a').textContent=ckD+'/'+ckT;
+  }else if(curJob==='service'){
+    document.getElementById('st-la').textContent='Tindakan';
+    document.getElementById('st-a').textContent=tindakanList.length;
+  }else{
+    document.getElementById('st-la').textContent='Seksi OK';
+    document.getElementById('st-a').textContent=Object.keys(pVals).length;
+  }
+  document.getElementById('st-b').textContent=okB;
+  document.getElementById('st-c').textContent=okA;
+
+  document.getElementById('sum-card').innerHTML=`
+    <div class="s-row"><span class="k">Jenis pekerjaan</span><span class="v">${JOB_LABELS[curJob]}${lastData.jenisInst?' — '+lastData.jenisInst:''}</span></div>
+    <div class="s-row"><span class="k">Tipe AC</span><span class="v">${AC_LABELS[curAC]}</span></div>
+    <div class="s-row"><span class="k">Customer</span><span class="v">${pel}</span></div>
+    <div class="s-row"><span class="k">Lokasi</span><span class="v" style="font-size:11px">${lastData.lok}</span></div>
+    <div class="s-row"><span class="k">Brand / PK</span><span class="v">${lastData.mrk} / ${lastData.pk}</span></div>
+    <div class="s-row"><span class="k">Jenis freon</span><span class="v">${lastData.freon||'—'}</span></div>
+    ${lastData.helper?`<div class="s-row"><span class="k">Helper</span><span class="v">${lastData.helper}</span></div>`:''}
+    <div class="s-row"><span class="k">Teknisi</span><span class="v">${tek}</span></div>
+    <div class="s-row"><span class="k">Tanggal</span><span class="v">${tglFmt}</span></div>
+    ${curJob==='cleaning'?`<div class="s-row"><span class="k">Langkah cleaning</span><span class="v">${ckD}/${ckT} selesai</span></div>`:''}
+    ${keluhanList.length?`<div class="s-row"><span class="k">Keluhan</span><span class="v" style="font-size:11px">${keluhanList.join(', ')}</span></div>`:''}
+    ${tindakanList.length?`<div class="s-row"><span class="k">Tindakan</span><span class="v" style="font-size:11px">${tindakanList.slice(0,3).join(', ')}${tindakanList.length>3?' +lainnya':''}</span></div>`:''}
+    <div class="s-row"><span class="k">Parameter before</span><span class="v" style="color:${noB>0?'var(--rd)':'var(--td)'}">✓ ${okB} · ✗ ${noB}</span></div>
+    <div class="s-row"><span class="k">Parameter after</span><span class="v" style="color:${noA>0?'var(--rd)':'var(--td)'}">✓ ${okA} · ✗ ${noA}</span></div>
+    ${analisa.redflag?`<div class="s-row"><span class="k" style="color:var(--rd)">⚠ Red flag</span><span class="v" style="font-size:11px;color:var(--rd)">${analisa.redflag}</span></div>`:''}`;
+
+  saveLocal(lastData);
+  go('s-done');
+  sendToSheets(lastData);
+}
+
+// ══ SHEETS ══
+async function sendToSheets(data){
+  const url=localStorage.getItem('hcs_url')||'';
+  const el=document.getElementById('done-gs');
+  const retry=document.getElementById('btn-retry');
+  if(!url){el.innerHTML='<span style="color:var(--am)">⚠️ Google Sheets belum dikonfigurasi — data tersimpan lokal</span>';return;}
+  el.innerHTML='<span style="color:var(--text2)">⏳ Mengirim ke Google Sheets...</span>';
+  try{
+    await fetch(url,{method:'POST',mode:'no-cors',body:JSON.stringify(data)});
+    el.innerHTML='<span style="color:var(--td)">✅ Terkirim ke Google Sheets</span>';
+    retry.style.display='none';
+    updateLocalSync(data.id,true);
+  }catch(e){
+    el.innerHTML='<span style="color:var(--rd)">❌ Gagal kirim — data tersimpan lokal</span>';
+    retry.style.display='flex';
+  }
+}
+async function retrySend(){if(lastData)await sendToSheets(lastData);}
+
+function saveLocal(data){
+  try{
+    const hist=JSON.parse(localStorage.getItem('hcs_hist')||'[]');
+    const idx=hist.findIndex(h=>h.id===data.id);
+    const item={id:data.id,pel:data.pel,jobType:data.jobType,jobLabel:data.jobLabel,acLabel:data.acLabel,tgl:data.tgl,tek:data.tek,ts:data.ts,status:'selesai',synced:false};
+    if(idx>=0)hist[idx]=item;else hist.unshift(item);
+    localStorage.setItem('hcs_hist',JSON.stringify(hist.slice(0,30)));
+    localStorage.setItem('hcs_data_'+data.id,JSON.stringify(data));
+  }catch(e){}
+}
+
+function updateLocalSync(id,synced){
+  try{
+    const hist=JSON.parse(localStorage.getItem('hcs_hist')||'[]');
+    const i=hist.findIndex(h=>h.id===id);
+    if(i>=0){hist[i].synced=synced;localStorage.setItem('hcs_hist',JSON.stringify(hist));}
+  }catch(e){}
+}
+
+function loadHist(){
+  const hist=JSON.parse(localStorage.getItem('hcs_hist')||'[]');
+  const sec=document.getElementById('hist-sec');
+  const list=document.getElementById('hist-list');
+  if(!hist.length){sec.style.display='none';return;}
+  sec.style.display='block';
+  list.innerHTML=hist.slice(0,5).map(h=>{
+    const d=h.tgl?new Date(h.tgl).toLocaleDateString('id-ID',{day:'numeric',month:'short'}):'-';
+    const syncTag=h.synced?'<span class="tag tag-g">✓ Sheets</span>':'<span class="tag tag-a">Lokal</span>';
+    const jobTag=h.jobType==='service'?'tag-a':h.jobType==='instalasi'?'tag-p':'tag-g';
+    return `<div class="hist-row"><div><div style="font-size:13px;font-weight:600">${h.pel}</div><div style="font-size:11px;color:var(--text2)">${h.acLabel} · ${h.tek} · ${d}</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px">${syncTag}<span class="tag ${jobTag}">${h.jobLabel||''}</span></div></div>`;
+  }).join('');
+}
+
+function loadSetup(){
+  document.getElementById('script-url').value=localStorage.getItem('hcs_url')||'';
+  document.getElementById('def-tek').value=localStorage.getItem('hcs_tek')||'';
+  document.getElementById('team-name').value=localStorage.getItem('hcs_team')||'';
+}
+
+function saveSetup(){
+  localStorage.setItem('hcs_url',document.getElementById('script-url').value.trim());
+  localStorage.setItem('hcs_tek',document.getElementById('def-tek').value.trim());
+  localStorage.setItem('hcs_team',document.getElementById('team-name').value.trim());
+  go('s-home');
+}
+
+async function testConn(){
+  const url=document.getElementById('script-url').value.trim();
+  const res=document.getElementById('test-result');
+  if(!url){res.innerHTML='<div class="banner warn">URL belum diisi</div>';return;}
+  res.innerHTML='<div class="banner info">⏳ Menguji koneksi...</div>';
+  try{
+    await fetch(url,{method:'POST',mode:'no-cors',body:JSON.stringify({id:'TEST-'+Date.now(),type:'test',ts:Date.now()})});
+    res.innerHTML='<div class="banner info">✅ URL valid! Simpan pengaturan lalu cek spreadsheet.</div>';
+  }catch(e){
+    res.innerHTML='<div class="banner warn">❌ Gagal. Cek URL dan pastikan "Who has access" = Anyone.</div>';
+  }
+}
+
+function checkBanner(){
+  const url=localStorage.getItem('hcs_url')||'';
+  document.getElementById('url-banner').innerHTML=url?'':`<div class="banner warn" style="margin:10px 16px">⚙️ Google Sheets belum terhubung. Ketuk ⚙️ untuk setup.</div>`;
+}
+
+checkBanner();loadHist();loadSetup();
+</script>
+</body>
+</html>
